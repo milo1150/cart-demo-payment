@@ -1,11 +1,11 @@
 package database
 
 import (
-	"cart-service/internal/models"
 	"fmt"
 	"log"
 	"os"
 
+	"github.com/milo1150/cart-demo-payment/internal/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

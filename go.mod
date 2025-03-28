@@ -1,4 +1,4 @@
-module cart-service
+module github.com/milo1150/cart-demo-payment
 
 go 1.24.1
 

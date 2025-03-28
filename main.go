@@ -1,14 +1,13 @@
 package main
 
 import (
-	"cart-service/internal/database"
-	"cart-service/internal/loader"
-	"cart-service/internal/middlewares"
-	"cart-service/internal/nats"
-	"cart-service/internal/routes"
-	"cart-service/internal/types"
-
 	"github.com/labstack/echo/v4"
+	"github.com/milo1150/cart-demo-payment/internal/database"
+	"github.com/milo1150/cart-demo-payment/internal/loader"
+	"github.com/milo1150/cart-demo-payment/internal/middlewares"
+	"github.com/milo1150/cart-demo-payment/internal/nats"
+	"github.com/milo1150/cart-demo-payment/internal/routes"
+	"github.com/milo1150/cart-demo-payment/internal/types"
 )
 
 func main() {

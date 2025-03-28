@@ -1,10 +1,10 @@
 package models
 
 import (
-	"cart-service/internal/enums"
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/milo1150/cart-demo-payment/internal/enums"
 	"gorm.io/gorm"
 )
 
