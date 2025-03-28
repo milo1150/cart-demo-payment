@@ -1,0 +1,17 @@
+# This is the Air configuration file
+root = "."
+tmp_dir = "tmp"
+
+[build]
+cmd = "go build -o ./tmp/main ."
+bin = "tmp/main"
+full_bin = "./tmp/main"
+include_ext = ["go"]
+exclude_dir = ["vendor", "tmp"]
+
+[log]
+level = "debug"
+
+[watch]
+delay = 1000
+patterns = [".*.go$", ".env"]
