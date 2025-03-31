@@ -18,6 +18,9 @@ func main() {
 	nc := nats.ConnectNATS()
 	defer nc.Close()
 
+	// NATS JetStream
+	js := nats.ConnectJetStream(nc)
+
 	// Database handler
 	db := database.ConnectDatabase()
 	database.RunAutoMigrate(db)
@@ -32,6 +35,7 @@ func main() {
 		DB:   db,
 		NATS: nc,
 		Log:  logger,
+		JS:   js,
 	}
 
 	// Creates an instance of Echo.
@@ -43,8 +47,8 @@ func main() {
 	// Init Route
 	routes.RegisterAppRoutes(e, appState)
 
-	// Init NATS Pub/Sub
-	nats.SubscribeToUserService(nc, logger, db)
+	// Run NATS services
+	go nats.SubscribeCheckoutEvent(js, logger, db)
 
 	// Start Server
 	e.Logger.Fatal(e.Start(":1323"))

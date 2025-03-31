@@ -5,8 +5,7 @@ import (
 	"os"
 
 	"github.com/nats-io/nats.go"
-	"go.uber.org/zap"
-	"gorm.io/gorm"
+	"github.com/nats-io/nats.go/jetstream"
 )
 
 func ConnectNATS() *nats.Conn {
@@ -21,6 +20,10 @@ func ConnectNATS() *nats.Conn {
 	return nc
 }
 
-func SubscribeToUserService(nc *nats.Conn, log *zap.Logger, db *gorm.DB) {
-	// go SubscribeCreateUserEvent(nc, log, db)
+func ConnectJetStream(nc *nats.Conn) jetstream.JetStream {
+	js, err := jetstream.New(nc)
+	if err != nil {
+		log.Fatalf("Failed to connect JetStream")
+	}
+	return js
 }
