@@ -1,7 +1,7 @@
 services:
-  postgres-cart: # service name must match the hostname in .env file.
+  postgres-payment: # service name must match the hostname in .env file.
     image: postgres:17.3
-    container_name: postgres-cart
+    container_name: postgres-payment
     environment:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_USER: ${DATABASE_USER}
@@ -27,7 +27,7 @@ services:
     volumes:
       - ../../:/app
     depends_on:
-      postgres-cart:
+      postgres-payment:
         condition: service_healthy
     networks:
       - cart-demo
