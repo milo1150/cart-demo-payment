@@ -1,16 +1,15 @@
 package routes
 
 import (
-	"net/http"
-
 	"github.com/labstack/echo/v4"
+	"github.com/milo1150/cart-demo-payment/internal/api"
 	"github.com/milo1150/cart-demo-payment/internal/types"
 )
 
 func PaymentRoutes(e *echo.Echo, appState *types.AppState) {
-	paymentGroup := e.Group("/payment")
+	paymentGroup := e.Group("/order")
 
-	paymentGroup.POST("/order/confirm", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, "TODO: Confirm payment")
+	paymentGroup.PATCH("/confirm/:checkout_id", func(c echo.Context) error {
+		return api.ConfirmPaymentOrderHandler(c, appState)
 	})
 }
