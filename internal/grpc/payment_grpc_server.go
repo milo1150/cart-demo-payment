@@ -23,15 +23,17 @@ func StartPaymentGRPCServer(appState *types.AppState) {
 		log.Fatalf("Failed to listen on port 50051: %v", err)
 	}
 
+	// Config rpc server
 	s := grpc.NewServer()
 	pb.RegisterPaymentServiceServer(s, &PaymentGRPCServer{AppState: appState})
 
+	// Print init message
 	log.Println("gRPC server is running on port 50051")
 
+	// Start grpc server
 	if err := s.Serve(listener); err != nil {
 		log.Fatalf("Failed to serve Payment gRPC server: %v", err)
 	}
-
 }
 
 func (p *PaymentGRPCServer) GetPayment(_ context.Context, payload *pb.GetPaymentRequest) (*pb.GetPaymentResponse, error) {
