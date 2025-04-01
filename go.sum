@@ -50,6 +50,8 @@ github.com/mattn/go-isatty v0.0.20 h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWE
 github.com/mattn/go-isatty v0.0.20/go.mod h1:W+V8PltTTMOvKvAeJH7IuucS94S2C6jfK/D7dTCTo3Y=
 github.com/milo1150/cart-demo-pkg v1.0.6 h1:EqjoXUe6CLnWS6lrRT8FePj8IOclWYa6+VXw1jKJD/E=
 github.com/milo1150/cart-demo-pkg v1.0.6/go.mod h1:PFgS7WV50MjHsolP9FVEomAY9oO4LtY+MzLjhjNlY34=
+github.com/milo1150/cart-demo-proto v1.0.3 h1:V/m6h0SESfRD2r1hJo1F+RkwrNfzO9W7Idf5P6mRYgQ=
+github.com/milo1150/cart-demo-proto v1.0.3/go.mod h1:QyHzyhPN0Z0fwMA58CqvlEfEp+7+tYE8htZgZSzKn70=
 github.com/nats-io/nats.go v1.39.1 h1:oTkfKBmz7W047vRxV762M67ZdXeOtUgvbBaNoQ+3PPk=
 github.com/nats-io/nats.go v1.39.1/go.mod h1:MgRb8oOdigA6cYpEPhXJuRVH6UE/V4jblJ2jQ27IXYM=
 github.com/nats-io/nkeys v0.4.9 h1:qe9Faq2Gxwi6RZnZMXfmGMZkg3afLLOtrU+gDZJ35b0=

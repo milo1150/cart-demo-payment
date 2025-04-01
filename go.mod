@@ -3,11 +3,11 @@ module github.com/milo1150/cart-demo-payment
 go 1.24.1
 
 require (
-	github.com/davecgh/go-spew v1.1.1
 	github.com/google/uuid v1.6.0
 	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v4 v4.13.3
 	github.com/milo1150/cart-demo-pkg v1.0.6
+	github.com/milo1150/cart-demo-proto v1.0.3
 	github.com/nats-io/nats.go v1.39.1
 	go.uber.org/zap v1.27.0
 	google.golang.org/grpc v1.71.0

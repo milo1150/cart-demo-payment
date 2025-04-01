@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/milo1150/cart-demo-payment/internal/database"
+	"github.com/milo1150/cart-demo-payment/internal/grpc"
 	"github.com/milo1150/cart-demo-payment/internal/loader"
 	"github.com/milo1150/cart-demo-payment/internal/middlewares"
 	"github.com/milo1150/cart-demo-payment/internal/nats"
@@ -28,8 +29,6 @@ func main() {
 	// Initialize Zap Logger
 	logger := middlewares.InitializeZapLogger()
 
-	// Connect to gRPC Servers
-
 	// Global state
 	appState := &types.AppState{
 		DB:   db,
@@ -49,6 +48,9 @@ func main() {
 
 	// Run NATS services
 	go nats.SubscribeCheckoutEvent(js, logger, db)
+
+	// gRPC Servers
+	go grpc.StartPaymentGRPCServer(appState)
 
 	// Start Server
 	e.Logger.Fatal(e.Start(":1323"))
