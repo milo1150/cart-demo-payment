@@ -3,21 +3,22 @@ package nats
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 
 	ps "github.com/milo1150/cart-demo-payment/pkg/schemas"
 	"github.com/nats-io/nats.go/jetstream"
-	"go.uber.org/zap"
 )
 
-func PublishCreatePaymentOrderHandler(js jetstream.JetStream, log *zap.Logger, ctx context.Context, payload ps.CreateCheckoutEventPayload) {
+func PublishCreatePaymentOrderHandler(js jetstream.JetStream, ctx context.Context, payload ps.PublishCreatedPaymentOrderPayload) error {
 	data, err := json.Marshal(payload)
 	if err != nil {
-		log.Error("Failed to parse payment_order.created payload", zap.Error(err))
-		return
+		return fmt.Errorf("Failed to parse payment_order.created payload: %w", err)
 	}
 
 	_, err = js.Publish(ctx, "payment_order.created", data)
 	if err != nil {
-		log.Error("Failed to publish payment_order.created", zap.Error(err))
+		return fmt.Errorf("Failed to publish payment_order.created: %w", err)
 	}
+
+	return nil
 }

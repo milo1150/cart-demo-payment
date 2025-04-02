@@ -24,7 +24,7 @@ func SubscribeCheckoutEvent(js jetstream.JetStream, log *zap.Logger, db *gorm.DB
 	}
 
 	cons.Consume(func(msg jetstream.Msg) {
-		err := SubscribeCheckoutHandler(log, db, msg)
+		err := SubscribeCheckoutHandler(log, db, msg, js)
 		if err != nil {
 			log.Error("Failed to create payment order", zap.Error(err))
 		}

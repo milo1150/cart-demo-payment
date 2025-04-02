@@ -23,7 +23,7 @@ func (p *PaymentOrder) CreatePaymentOrder(payload ps.CreateCheckoutEventPayload)
 	if err := p.DB.Create(&po).Error; err != nil {
 		return nil, err
 	}
-	return nil, nil
+	return &po, nil
 }
 
 func (p *PaymentOrder) ExistsPaymentOrderByCheckoutId(checkoutId uint) bool {
