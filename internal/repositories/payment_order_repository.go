@@ -5,7 +5,7 @@ import (
 
 	"github.com/milo1150/cart-demo-payment/internal/enums"
 	"github.com/milo1150/cart-demo-payment/internal/models"
-	"github.com/milo1150/cart-demo-payment/internal/schemas"
+	ps "github.com/milo1150/cart-demo-payment/pkg/schemas"
 	"gorm.io/gorm"
 )
 
@@ -13,7 +13,7 @@ type PaymentOrder struct {
 	DB *gorm.DB
 }
 
-func (p *PaymentOrder) CreatePaymentOrder(payload schemas.CreateCheckoutEventPayload) (*models.PaymentOrder, error) {
+func (p *PaymentOrder) CreatePaymentOrder(payload ps.CreateCheckoutEventPayload) (*models.PaymentOrder, error) {
 	po := models.PaymentOrder{
 		Total:      0,
 		Status:     enums.PENDING,

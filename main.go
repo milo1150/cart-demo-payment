@@ -48,6 +48,7 @@ func main() {
 
 	// Run NATS services
 	go nats.SubscribeCheckoutEvent(js, logger, db)
+	go nats.PublishCreatePaymentOrderEvent(js)
 
 	// gRPC Servers
 	go grpc.StartPaymentGRPCServer(appState)

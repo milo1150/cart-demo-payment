@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/milo1150/cart-demo-payment/internal/schemas"
+	ps "github.com/milo1150/cart-demo-payment/pkg/schemas"
 	"github.com/nats-io/nats.go/jetstream"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
@@ -28,7 +28,7 @@ func SubscribeCheckoutEvent(js jetstream.JetStream, log *zap.Logger, db *gorm.DB
 
 	cons.Consume(func(msg jetstream.Msg) {
 		err := func() error {
-			payload := schemas.CreateCheckoutEventPayload{}
+			payload := ps.CreateCheckoutEventPayload{}
 			if err := json.Unmarshal(msg.Data(), &payload); err != nil {
 				log.Error("Failed to parse checkout.created payload", zap.Error(err))
 				return err
