@@ -2,11 +2,8 @@ package nats
 
 import (
 	"context"
-	"encoding/json"
-	"fmt"
 	"time"
 
-	ps "github.com/milo1150/cart-demo-payment/pkg/schemas"
 	"github.com/nats-io/nats.go/jetstream"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
@@ -27,23 +24,10 @@ func SubscribeCheckoutEvent(js jetstream.JetStream, log *zap.Logger, db *gorm.DB
 	}
 
 	cons.Consume(func(msg jetstream.Msg) {
-		err := func() error {
-			payload := ps.CreateCheckoutEventPayload{}
-			if err := json.Unmarshal(msg.Data(), &payload); err != nil {
-				log.Error("Failed to parse checkout.created payload", zap.Error(err))
-				return err
-			}
-
-			if err := SubscribeCheckoutHandler(log, db, payload, msg); err != nil {
-				log.Error("Failed to create payment order", zap.Error(err))
-				return err
-			}
-
-			fmt.Println("created", payload)
-
-			return nil
-		}()
-
+		err := SubscribeCheckoutHandler(log, db, msg)
+		if err != nil {
+			log.Error("Failed to create payment order", zap.Error(err))
+		}
 		if err == nil {
 			msg.Ack()
 		}

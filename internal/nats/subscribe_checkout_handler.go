@@ -1,6 +1,7 @@
 package nats
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/milo1150/cart-demo-payment/internal/repositories"
@@ -10,7 +11,13 @@ import (
 	"gorm.io/gorm"
 )
 
-func SubscribeCheckoutHandler(log *zap.Logger, db *gorm.DB, payload ps.CreateCheckoutEventPayload, msg jetstream.Msg) error {
+func SubscribeCheckoutHandler(log *zap.Logger, db *gorm.DB, msg jetstream.Msg) error {
+	payload := ps.CreateCheckoutEventPayload{}
+	if err := json.Unmarshal(msg.Data(), &payload); err != nil {
+		log.Error("Failed to parse checkout.created payload", zap.Error(err))
+		return err
+	}
+
 	paymentOrderRepository := repositories.PaymentOrder{DB: db}
 
 	// Check if payment_order already exists
