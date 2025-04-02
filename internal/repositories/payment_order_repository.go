@@ -58,3 +58,12 @@ func (p *PaymentOrder) ConfirmPaymentOrder(checkoutId uint) error {
 	}
 	return nil
 }
+
+func (p *PaymentOrder) GetPayments(paymentIds []uint64) (*[]models.PaymentOrder, error) {
+	result := []models.PaymentOrder{}
+	query := p.DB.Where(paymentIds).Find(&result)
+	if query.Error != nil {
+		return nil, query.Error
+	}
+	return &result, nil
+}

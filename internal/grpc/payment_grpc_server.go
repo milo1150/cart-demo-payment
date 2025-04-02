@@ -5,6 +5,7 @@ import (
 	"log"
 	"net"
 
+	"github.com/milo1150/cart-demo-payment/internal/dto"
 	"github.com/milo1150/cart-demo-payment/internal/repositories"
 	"github.com/milo1150/cart-demo-payment/internal/types"
 	"google.golang.org/grpc"
@@ -37,8 +38,8 @@ func StartPaymentGRPCServer(appState *types.AppState) {
 }
 
 func (p *PaymentGRPCServer) GetPayment(_ context.Context, payload *pb.GetPaymentOrderRequest) (*pb.GetPaymentOrderResponse, error) {
-	pr := repositories.PaymentOrder{DB: p.AppState.DB}
-	paymentOrder, err := pr.FindPaymentOrderByCheckoutId(uint(payload.PaymentOrderId))
+	rp := repositories.PaymentOrder{DB: p.AppState.DB}
+	paymentOrder, err := rp.FindPaymentOrderByCheckoutId(uint(payload.PaymentOrderId))
 	if err != nil {
 		return nil, err
 	}
@@ -50,4 +51,18 @@ func (p *PaymentGRPCServer) GetPayment(_ context.Context, payload *pb.GetPayment
 	}
 
 	return &res, nil
+}
+
+func (p *PaymentGRPCServer) GetPayments(_ context.Context, payload *pb.GetPaymentOrderListRequest) (*pb.GetPaymentOrderListResponse, error) {
+	rp := repositories.PaymentOrder{DB: p.AppState.DB}
+	paymentOrders, err := rp.GetPayments(payload.PaymentOrderIds)
+	if err != nil {
+		return nil, err
+	}
+
+	res := &pb.GetPaymentOrderListResponse{
+		PaymentOrders: dto.TransformProtoPaymentOrderList(*paymentOrders),
+	}
+
+	return res, nil
 }
