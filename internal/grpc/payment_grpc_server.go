@@ -36,14 +36,14 @@ func StartPaymentGRPCServer(appState *types.AppState) {
 	}
 }
 
-func (p *PaymentGRPCServer) GetPayment(_ context.Context, payload *pb.GetPaymentRequest) (*pb.GetPaymentResponse, error) {
+func (p *PaymentGRPCServer) GetPayment(_ context.Context, payload *pb.GetPaymentOrderRequest) (*pb.GetPaymentOrderResponse, error) {
 	pr := repositories.PaymentOrder{DB: p.AppState.DB}
 	paymentOrder, err := pr.FindPaymentOrderByCheckoutId(uint(payload.PaymentOrderId))
 	if err != nil {
 		return nil, err
 	}
 
-	res := pb.GetPaymentResponse{
+	res := pb.GetPaymentOrderResponse{
 		Id:     uint64(paymentOrder.ID),
 		Total:  float32(paymentOrder.Total),
 		Status: paymentOrder.Status.ToString(),
