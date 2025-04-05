@@ -49,7 +49,7 @@ func (p *PaymentOrder) FindPaymentOrderByCheckoutId(checkoutId uint) (*models.Pa
 func (p *PaymentOrder) ConfirmPaymentOrder(checkoutId uint) error {
 	result := p.DB.Model(&models.PaymentOrder{}).
 		Where("checkout_id = ?", checkoutId).
-		Update("status", enums.DONE)
+		Update("status", enums.COMPLETED)
 	if result.Error != nil {
 		return fmt.Errorf("failed to update payment order status: %w", result.Error)
 	}

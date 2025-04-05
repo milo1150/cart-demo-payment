@@ -8,4 +8,5 @@ import (
 func RegisterMiddlewares(e *echo.Echo) {
 	e.Use(logger())
 	e.Use(middleware.Recover())
+	e.Use(CORS())
 }
