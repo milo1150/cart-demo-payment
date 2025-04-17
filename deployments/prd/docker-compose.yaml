@@ -20,7 +20,7 @@ services:
 
   app:
     build:
-      context: ../../
+      context: .
       dockerfile: deployments/prd/Dockerfile
     expose:
       - 1323
