@@ -20,7 +20,7 @@ services:
 
   app:
     build:
-      context: .
+      context: ${APP_BUILD_CONTEXT} # coolify use . value, maybe a bug.
       dockerfile: deployments/prd/Dockerfile
     expose:
       - 1323
