@@ -4,4 +4,4 @@
 . ./load-env.sh
 
 # Run Docker Compose with the correct environment
-docker-compose -f ../deployments/dev/docker-compose.yaml up
+docker-compose -f ../deployments/prd/docker-compose.yaml down
