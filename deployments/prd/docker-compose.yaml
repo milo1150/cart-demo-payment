@@ -18,7 +18,7 @@ services:
     networks:
       - cart-demo
 
-  app:
+  payment-service:
     build:
       context: ${APP_BUILD_CONTEXT} # coolify use . value, maybe a bug.
       dockerfile: deployments/prd/Dockerfile
